@@ -1,0 +1,15 @@
+[book]
+authors = ["zhouyu.done"]
+language = "en"
+multilingual = false
+src = "src"
+title = "KnowBank"
+description = "Knowledge Bank"
+
+[output.html]
+default-theme = "light"
+smart-punctuation = true
+
+#[output.html.git-repository-url]
+# GitHub仓库链接（可选）
+#repository-url = "https://github.com/username/my-gitbook"
