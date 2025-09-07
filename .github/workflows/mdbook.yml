@@ -34,14 +34,29 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install mdBook
         run: |
-          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
-          rustup update
-          cargo install --version ${MDBOOK_VERSION} mdbook
+          wget https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          tar xf mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          chmod +x mdbook
+          sudo mv mdbook /usr/local/bin/
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with mdBook
         run: mdbook build
+      - name: Verify build output
+        run: |
+          echo "Checking if critical files exist..."
+          ls -la book/
+          echo "Checking CSS files..."
+          find book -name "*.css" | head -5
+          echo "Checking JavaScript files..."
+          find book -name "*.js" | head -5
+          echo "Checking toc files..."
+          ls -la book/toc.*
+          echo "Checking index.html for sidebar element..."
+          grep -n "sidebar-scrollbox" book/index.html || echo "Sidebar element not found!"
+          echo "Checking toc.js for MDBookSidebarScrollbox..."
+          grep -n "MDBookSidebarScrollbox" book/toc.js || echo "Custom element not found!"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

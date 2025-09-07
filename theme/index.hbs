@@ -64,6 +64,21 @@
         </script>
         <!-- Start loading toc.js asap -->
         <script src="{{ path_to_root }}toc.js"></script>
+        
+        <!-- Fallback for sidebar loading -->
+        <script>
+            // Check if sidebar content loaded after a short delay
+            setTimeout(function() {
+                var sidebarScrollbox = document.querySelector('mdbook-sidebar-scrollbox');
+                var fallback = document.getElementById('sidebar-fallback');
+                
+                if (sidebarScrollbox && sidebarScrollbox.innerHTML.trim() === '' && fallback) {
+                    console.log('Sidebar custom element empty, showing fallback');
+                    sidebarScrollbox.style.display = 'none';
+                    fallback.style.display = 'block';
+                }
+            }, 1000);
+        </script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -134,6 +149,19 @@
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="{{ path_to_root }}toc.html"></iframe>
             </noscript>
+            <!-- Fallback content in case JavaScript doesn't load -->
+            <div id="sidebar-fallback" style="display: none;">
+                <ol class="chapter">
+                    <li class="chapter-item expanded affix"><a href="{{ path_to_root }}index.html">Introduction</a></li>
+                    <li class="part-title">User Guide</li>
+                    <li class="chapter-item expanded"><a href="{{ path_to_root }}chapter_1.html"><strong aria-hidden="true">1.</strong> Advanced Theme Demo</a></li>
+                    <li class="chapter-item expanded"><a href="{{ path_to_root }}features.html"><strong aria-hidden="true">2.</strong> Theme Features</a></li>
+                    <li class="chapter-item expanded"><a href="{{ path_to_root }}config.html"><strong aria-hidden="true">3.</strong> Configuration Guide</a></li>
+                    <li class="part-title">Advanced Topics</li>
+                    <li class="chapter-item expanded"><a href="{{ path_to_root }}customization.html"><strong aria-hidden="true">4.</strong> Customization</a></li>
+                    <li class="chapter-item expanded"><a href="{{ path_to_root }}performance.html"><strong aria-hidden="true">5.</strong> Performance</a></li>
+                </ol>
+            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>

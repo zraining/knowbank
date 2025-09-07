@@ -10,7 +10,7 @@ create-missing = true
 
 [output.html]
 # Theme configuration
-default-theme = "navy"
+default-theme = "light"
 preferred-dark-theme = "navy"
 theme = "theme"
 
