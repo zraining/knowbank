@@ -52,11 +52,13 @@ jobs:
           echo "Checking JavaScript files..."
           find book -name "*.js" | head -5
           echo "Checking toc files..."
-          ls -la book/toc.*
+          ls -la book/toc.* || echo "TOC files not found - this may be expected with newer mdBook versions"
           echo "Checking index.html for sidebar element..."
           grep -n "sidebar-scrollbox" book/index.html || echo "Sidebar element not found!"
-          echo "Checking toc.js for MDBookSidebarScrollbox..."
-          grep -n "MDBookSidebarScrollbox" book/toc.js || echo "Custom element not found!"
+          echo "Checking for alternative sidebar implementation..."
+          grep -n "sidebar" book/index.html | head -3 || echo "No sidebar found!"
+          echo "Checking if book.js contains sidebar functionality..."
+          grep -n "sidebar\|toc" book/book.js | head -3 || echo "No sidebar functionality in book.js"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

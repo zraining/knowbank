@@ -62,22 +62,14 @@
             window.path_to_searchindex_js = "{{ path_to_root }}searchindex.js";
         {{/if}}
         </script>
-        <!-- Start loading toc.js asap -->
-        <script src="{{ path_to_root }}toc.js"></script>
-        
-        <!-- Fallback for sidebar loading -->
+        <!-- Load mdBook's default JavaScript -->
         <script>
-            // Check if sidebar content loaded after a short delay
-            setTimeout(function() {
-                var sidebarScrollbox = document.querySelector('mdbook-sidebar-scrollbox');
-                var fallback = document.getElementById('sidebar-fallback');
-                
-                if (sidebarScrollbox && sidebarScrollbox.innerHTML.trim() === '' && fallback) {
-                    console.log('Sidebar custom element empty, showing fallback');
-                    sidebarScrollbox.style.display = 'none';
-                    fallback.style.display = 'block';
-                }
-            }, 1000);
+            const path_to_root = "{{ path_to_root }}";
+            const default_light_theme = "{{ default_theme }}";
+            const default_dark_theme = "{{ preferred_dark_theme }}";
+        {{#if search_js}}
+            window.path_to_searchindex_js = "{{ path_to_root }}searchindex.js";
+        {{/if}}
         </script>
     </head>
     <body>
@@ -144,24 +136,22 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <!-- populated by js -->
-            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-            <noscript>
-                <iframe class="sidebar-iframe-outer" src="{{ path_to_root }}toc.html"></iframe>
-            </noscript>
-            <!-- Fallback content in case JavaScript doesn't load -->
-            <div id="sidebar-fallback" style="display: none;">
+            <!-- Sidebar content populated dynamically -->
+            <div class="sidebar-scrollbox">
                 <ol class="chapter">
                     <li class="chapter-item expanded affix"><a href="{{ path_to_root }}index.html">Introduction</a></li>
-                    <li class="part-title">User Guide</li>
+                    <li class="chapter-item expanded affix"><li class="part-title">User Guide</li>
                     <li class="chapter-item expanded"><a href="{{ path_to_root }}chapter_1.html"><strong aria-hidden="true">1.</strong> Advanced Theme Demo</a></li>
                     <li class="chapter-item expanded"><a href="{{ path_to_root }}features.html"><strong aria-hidden="true">2.</strong> Theme Features</a></li>
                     <li class="chapter-item expanded"><a href="{{ path_to_root }}config.html"><strong aria-hidden="true">3.</strong> Configuration Guide</a></li>
-                    <li class="part-title">Advanced Topics</li>
+                    <li class="chapter-item expanded affix"><li class="part-title">Advanced Topics</li>
                     <li class="chapter-item expanded"><a href="{{ path_to_root }}customization.html"><strong aria-hidden="true">4.</strong> Customization</a></li>
                     <li class="chapter-item expanded"><a href="{{ path_to_root }}performance.html"><strong aria-hidden="true">5.</strong> Performance</a></li>
                 </ol>
             </div>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="{{ path_to_root }}toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
@@ -351,6 +341,32 @@
         <script src="{{ path_to_root }}clipboard.min.js"></script>
         <script src="{{ path_to_root }}highlight.js"></script>
         <script src="{{ path_to_root }}book.js"></script>
+        
+        <!-- Enhanced sidebar functionality -->
+        <script>
+            // Highlight current page in sidebar
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentPath = window.location.pathname;
+                var sidebarLinks = document.querySelectorAll('.sidebar a');
+                
+                sidebarLinks.forEach(function(link) {
+                    var linkPath = link.getAttribute('href');
+                    if (linkPath && currentPath.endsWith(linkPath)) {
+                        link.classList.add('active');
+                        var parent = link.parentElement;
+                        if (parent && parent.classList.contains('chapter-item')) {
+                            parent.classList.add('expanded');
+                        }
+                    }
+                });
+                
+                // Handle sidebar scroll position
+                var activeLink = document.querySelector('.sidebar a.active');
+                if (activeLink) {
+                    activeLink.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                }
+            });
+        </script>
 
         <!-- Custom JS scripts -->
         {{#each additional_js}}
