@@ -1,15 +1,37 @@
 [book]
-authors = ["zhouyu.done"]
+authors = ["zhouyu3"]
 language = "en"
-multilingual = false
 src = "src"
 title = "KnowBank"
-description = "Knowledge Bank"
+description = "Advanced Knowledge Bank with Custom Theme"
+
+[build]
+create-missing = true
 
 [output.html]
-default-theme = "light"
-smart-punctuation = true
+# Theme configuration
+default-theme = "navy"
+preferred-dark-theme = "navy"
+theme = "theme"
 
-#[output.html.git-repository-url]
-# GitHub仓库链接（可选）
-#repository-url = "https://github.com/username/my-gitbook"
+# Advanced HTML features
+smart-punctuation = true
+mathjax-support = true
+copy-fonts = true
+
+# Print support
+print-enable = true
+
+# Custom styling
+additional-css = ["theme/css/custom.css"]
+additional-js = ["theme/js/custom.js"]
+
+# Search configuration
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
