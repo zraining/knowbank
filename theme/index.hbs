@@ -136,22 +136,9 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <!-- Sidebar content populated dynamically -->
             <div class="sidebar-scrollbox">
-                <ol class="chapter">
-                    <li class="chapter-item expanded affix"><a href="{{ path_to_root }}index.html">Introduction</a></li>
-                    <li class="chapter-item expanded affix"><li class="part-title">User Guide</li>
-                    <li class="chapter-item expanded"><a href="{{ path_to_root }}chapter_1.html"><strong aria-hidden="true">1.</strong> Advanced Theme Demo</a></li>
-                    <li class="chapter-item expanded"><a href="{{ path_to_root }}features.html"><strong aria-hidden="true">2.</strong> Theme Features</a></li>
-                    <li class="chapter-item expanded"><a href="{{ path_to_root }}config.html"><strong aria-hidden="true">3.</strong> Configuration Guide</a></li>
-                    <li class="chapter-item expanded affix"><li class="part-title">Advanced Topics</li>
-                    <li class="chapter-item expanded"><a href="{{ path_to_root }}customization.html"><strong aria-hidden="true">4.</strong> Customization</a></li>
-                    <li class="chapter-item expanded"><a href="{{ path_to_root }}performance.html"><strong aria-hidden="true">5.</strong> Performance</a></li>
-                </ol>
+                {{#toc}}{{/toc}}
             </div>
-            <noscript>
-                <iframe class="sidebar-iframe-outer" src="{{ path_to_root }}toc.html"></iframe>
-            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
