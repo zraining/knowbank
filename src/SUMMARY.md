@@ -20,3 +20,4 @@
 
 # AI 驱动型编程（Vibe Coding）
 - [Vibe Coding 简介](./vibe_coding/vibe_coding_introduction.md)
+- [可重用的自定义指令](./vibe_coding/custom_instructions.md)
