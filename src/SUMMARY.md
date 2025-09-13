@@ -17,3 +17,6 @@
 - [状态管理](./frontend_dev/state_management.md)
 - [样式与主题](./frontend_dev/styling_theming.md)
 - [前端部署](./frontend_dev/frontend_deployment.md)
+
+# AI 驱动型编程（Vibe Coding）
+- [Vibe Coding 简介](./vibe_coding/vibe_coding_introduction.md)
