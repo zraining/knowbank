@@ -10,12 +10,6 @@
 - [API设计](./requirements_design/api_design.md)
 - [UI/UX设计](./requirements_design/ui_ux_design.md)
 
-# AI提示工程
-- [提示工程基础](./ai_prompts/prompt_engineering_basics.md)
-- [需求分析提示模板](./ai_prompts/requirements_prompts.md)
-- [设计类提示模板](./ai_prompts/design_prompts.md)
-- [编码提示模板](./ai_prompts/coding_prompts.md)
-- [测试提示模板](./ai_prompts/testing_prompts.md)
 
 # 前端开发
 - [前端框架选择](./frontend_dev/frontend_framework.md)
