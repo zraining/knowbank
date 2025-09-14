@@ -13,6 +13,8 @@ create-missing = true
 default-theme = "light"
 preferred-dark-theme = "navy"
 theme = "theme"
+site-url = "/"
+cname = "localhost"
 
 # Advanced HTML features
 smart-punctuation = true
@@ -23,8 +25,8 @@ copy-fonts = true
 print-enable = true
 
 # Custom styling
-additional-css = ["theme/css/custom.css"]
-additional-js = ["theme/js/custom.js"]
+# additional-css = ["css/custom.css"]
+# additional-js = ["js/custom.js"]
 
 # Search configuration
 [output.html.search]
