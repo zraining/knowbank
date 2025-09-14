@@ -1,6 +1,6 @@
 # KnowBank - 现代软件开发知识库
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://github.com/zhouyu3/knowbank)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://zraining.github.io/knowbank)
 
 一个专为现代软件开发者打造的综合性知识库，涵盖从需求分析到AI驱动编程的完整技术栈。
 
