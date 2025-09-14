@@ -1,15 +1,29 @@
-# Welcome to KnowBank
+# KnowBank - 现代软件开发知识库
 
-Your personal knowledge repository.
+一个专为现代软件开发者打造的综合性知识库，涵盖从需求分析到AI驱动编程的完整技术栈。
 
-## About
+## 📚 关于本书
 
-This is your knowledge bank where you can organize and share your thoughts, ideas, and learning materials.
+在快速发展的技术世界中，掌握系统性的开发知识变得越来越重要。KnowBank 整合了软件开发全生命周期的核心知识，帮助开发者建立完整的技术体系。
 
-## Getting Started
+### 🎯 本书涵盖内容
 
-Start by exploring the different sections or add your own content to build your knowledge base.
+- **需求分析与设计** - 从业务需求到系统架构的完整设计流程
+- **前端开发** - 现代前端技术栈与最佳实践
+- **大语言模型知识** - LLM基础概念与应用原理
+- **AI驱动型编程** - Vibe Coding方法论与实践指南
+
+### 🚀 适合人群
+
+- 希望系统学习软件开发的初学者
+- 想要完善知识体系的中级开发者
+- 对AI辅助编程感兴趣的技术人员
+- 需要快速上手现代开发流程的团队成员
+
+## 🌟 开始探索
+
+选择感兴趣的章节开始学习，或按照目录顺序系统性地构建你的知识体系。每个章节都包含理论基础、实践案例和最佳实践。
 
 ---
 
-*Start writing and building your knowledge bank today!*
+*知识无界，代码有道 - 与AI共舞的开发新时代*
