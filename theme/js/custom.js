@@ -236,6 +236,142 @@
         }
     }
 
+    // Add chapter navigation to sidebar
+    function addChapterNavigation() {
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        
+        if (!sidebar || !content) return;
+        
+        // Find current page link in sidebar
+        const currentPageLink = sidebar.querySelector('a.active');
+        if (!currentPageLink) return;
+        
+        const currentPageItem = currentPageLink.closest('li');
+        if (!currentPageItem) return;
+        
+        // Get headings from current page content
+        const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        if (headings.length === 0) return;
+        
+        // Remove existing chapter navigation
+        const existingChapterNav = currentPageItem.querySelector('.chapter-navigation');
+        if (existingChapterNav) {
+            existingChapterNav.remove();
+        }
+        
+        // Create chapter navigation container
+        const chapterNav = document.createElement('ul');
+        chapterNav.className = 'chapter-navigation';
+        chapterNav.style.cssText = `
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 1rem;
+            border-left: 2px solid var(--sidebar-spacer);
+            padding-left: 0.5rem;
+        `;
+        
+        // Generate navigation items for each heading
+        headings.forEach((heading, index) => {
+            const id = heading.id || `heading-${index}`;
+            if (!heading.id) {
+                heading.id = id;
+            }
+            
+            const level = parseInt(heading.tagName.slice(1));
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            
+            link.href = `#${id}`;
+            link.textContent = heading.textContent;
+            link.className = 'chapter-link';
+            link.style.cssText = `
+                display: block;
+                padding: 0.25rem 0;
+                color: var(--sidebar-non-existant);
+                text-decoration: none;
+                font-size: 0.85rem;
+                line-height: 1.3;
+                padding-left: ${(level - 1) * 0.75}rem;
+                border-radius: 4px;
+                transition: all 0.2s ease;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            `;
+            
+            // Add hover effects
+            link.addEventListener('mouseenter', function() {
+                this.style.color = 'var(--sidebar-active)';
+                this.style.backgroundColor = 'var(--theme-hover)';
+                this.style.paddingLeft = `${(level - 1) * 0.75 + 0.25}rem`;
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.color = 'var(--sidebar-non-existant)';
+                this.style.backgroundColor = 'transparent';
+                this.style.paddingLeft = `${(level - 1) * 0.75}rem`;
+            });
+            
+            // Add click handler for smooth scrolling
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetElement = document.getElementById(id);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update URL hash
+                    history.pushState(null, null, `#${id}`);
+                    
+                    // Highlight active chapter link
+                    chapterNav.querySelectorAll('.chapter-link').forEach(l => {
+                        l.style.color = 'var(--sidebar-non-existant)';
+                        l.style.fontWeight = 'normal';
+                    });
+                    this.style.color = 'var(--sidebar-active)';
+                    this.style.fontWeight = '600';
+                }
+            });
+            
+            listItem.appendChild(link);
+            chapterNav.appendChild(listItem);
+        });
+        
+        // Add chapter navigation to current page item
+        currentPageItem.appendChild(chapterNav);
+        
+        // Highlight current section based on scroll position
+        function updateActiveChapterLink() {
+            const scrollTop = window.pageYOffset;
+            const chapterLinks = chapterNav.querySelectorAll('.chapter-link');
+            
+            let activeLink = null;
+            headings.forEach((heading, index) => {
+                const rect = heading.getBoundingClientRect();
+                if (rect.top <= 100) {
+                    activeLink = chapterLinks[index];
+                }
+            });
+            
+            chapterLinks.forEach(link => {
+                link.style.color = 'var(--sidebar-non-existant)';
+                link.style.fontWeight = 'normal';
+            });
+            
+            if (activeLink) {
+                activeLink.style.color = 'var(--sidebar-active)';
+                activeLink.style.fontWeight = '600';
+            }
+        }
+        
+        // Add scroll listener for active section highlighting
+        window.addEventListener('scroll', updateActiveChapterLink);
+        updateActiveChapterLink(); // Initial call
+    }
+
     // Initialize all enhancements
     function init() {
         // Wait for DOM to be ready
@@ -251,6 +387,7 @@
         enhanceAnchorLinks();
         addKeyboardShortcuts();
         enhanceThemePersistence();
+        addChapterNavigation();
         
         // Re-run some functions when content changes (for SPA-like behavior)
         const observer = new MutationObserver(function(mutations) {
@@ -259,6 +396,7 @@
                     setTimeout(() => {
                         enhanceCodeCopy();
                         addFadeInAnimation();
+                        addChapterNavigation();
                     }, 100);
                 }
             });

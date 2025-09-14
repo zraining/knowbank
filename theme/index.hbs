@@ -62,15 +62,6 @@
             window.path_to_searchindex_js = "{{ path_to_root }}searchindex.js";
         {{/if}}
         </script>
-        <!-- Load mdBook's default JavaScript -->
-        <script>
-            const path_to_root = "{{ path_to_root }}";
-            const default_light_theme = "{{ default_theme }}";
-            const default_dark_theme = "{{ preferred_dark_theme }}";
-        {{#if search_js}}
-            window.path_to_searchindex_js = "{{ path_to_root }}searchindex.js";
-        {{/if}}
-        </script>
     </head>
     <body>
     <div id="mdbook-help-container">
