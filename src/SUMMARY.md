@@ -25,3 +25,7 @@
 - [Vibe Coding 简介](./vibe_coding/vibe_coding_introduction.md)
 - [可重用的自定义指令](./vibe_coding/custom_instructions.md)
 - [任务类型驱动的Prompt](./vibe_coding/task_prompt.md)
+
+# 智能代理与工具集成
+- [Agent工具系统](./agent/agent_tools.md)
+- [模型上下文协议（MCP）](./agent/mcp_protocol.md)
