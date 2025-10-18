@@ -646,31 +646,66 @@ html:not(.sidebar-resizing) .sidebar {
     border-radius: 2px;
 }
 
-.chapter li > a.toggle {
+/* Folding functionality styles */
+.part-title {
+    position: relative;
     cursor: pointer;
-    display: block;
-    margin-inline-start: auto;
-    padding: 0 10px;
-    user-select: none;
-    opacity: 0.68;
+    display: flex;
+    align-items: center;
+    user-select: none; /* Prevent text selection when clicking to toggle */
 }
 
-.chapter li > a.toggle div {
-    transition: transform 0.5s;
+.part-title .toggle {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid #666;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
-/* collapse the section */
-.chapter li:not(.expanded) + li > ol {
-    display: none;
+.chapter-item.expanded .part-title .toggle,
+.part-title.expanded .toggle {
+    transform: rotate(90deg);
+}
+
+/* Hide sub-chapters when parent is collapsed */
+.chapter-item.collapsed {
+    display: none !important;
+}
+
+/* Light theme adjustments */
+.light .part-title .toggle {
+    border-left-color: #666;
+}
+
+/* Dark theme adjustments */
+.rust .part-title .toggle,
+.coal .part-title .toggle,
+.navy .part-title .toggle,
+.ayu .part-title .toggle {
+    border-left-color: #999;
+}
+
+/* Hover effects */
+.part-title:hover .toggle {
+    border-left-color: #333;
+}
+
+.rust .part-title:hover .toggle,
+.coal .part-title:hover .toggle,
+.navy .part-title:hover .toggle,
+.ayu .part-title:hover .toggle {
+    border-left-color: #ccc;
 }
 
 .chapter li.chapter-item {
     line-height: 1.5em;
     margin-block-start: 0.6em;
-}
-
-.chapter li.expanded > a.toggle div {
-    transform: rotate(90deg);
 }
 
 .spacer {

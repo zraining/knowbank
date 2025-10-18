@@ -837,3 +837,154 @@ aria-label="Show hidden lines"></button>';
         document.addEventListener('scroll', updateBorder, { passive: true });
     })();
 })();
+
+(function fold() {
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        var sidebar = document.querySelector('.sidebar');
+        if (!sidebar) {
+            console.log('Sidebar not found');
+            return;
+        }
+
+        console.log('Initializing fold functionality');
+
+        // Add fold functionality to part titles (sections with sub-chapters)
+        function addFoldButtons() {
+            var allItems = sidebar.querySelectorAll('ol.chapter > li');
+            console.log('Found all items:', allItems.length);
+            
+            for (var i = 0; i < allItems.length; i++) {
+                var item = allItems[i];
+                
+                // Check if this item is a part-title (either has the class directly or contains one)
+                var hasPartTitleClass = item.classList.contains('part-title');
+                var partTitleElement = item.querySelector('.part-title');
+                var hasAffixClass = item.classList.contains('affix');
+                var hasTextContent = item.textContent && item.textContent.trim();
+                var hasLink = item.querySelector('a');
+                
+                var isPartTitle = hasPartTitleClass || partTitleElement || (hasAffixClass && hasTextContent && !hasLink);
+                
+                if (isPartTitle) {
+                    var partTitle = partTitleElement || item;
+                    var parentItem = partTitleElement ? item : item; // The li element that should get the expanded class
+                    var subChapters = [];
+                    
+                    // Collect following chapter-items until we hit another part-title or end
+                    for (var j = i + 1; j < allItems.length; j++) {
+                        var nextItem = allItems[j];
+                        var nextHasPartTitleClass = nextItem.classList.contains('part-title');
+                        var nextPartTitleElement = nextItem.querySelector('.part-title');
+                        var nextHasAffixClass = nextItem.classList.contains('affix');
+                        var nextHasTextContent = nextItem.textContent && nextItem.textContent.trim();
+                        var nextHasLink = nextItem.querySelector('a');
+                        
+                        var nextIsPartTitle = nextHasPartTitleClass || nextPartTitleElement || (nextHasAffixClass && nextHasTextContent && !nextHasLink);
+                        
+                        if (nextIsPartTitle) {
+                            break; // Stop when we hit another part-title
+                        }
+                        if (nextItem.classList.contains('chapter-item') && !nextItem.classList.contains('affix') && nextItem.querySelector('a')) {
+                            subChapters.push(nextItem);
+                        }
+                    }
+                    
+                    var partTitleText = partTitle.textContent.trim();
+                    console.log('Part title:', partTitleText, 'sub-chapters:', subChapters.length);
+                    
+                    if (subChapters.length > 0) {
+                        // Check if toggle already exists
+                        if (partTitle.querySelector('.toggle')) {
+                            console.log('Toggle already exists for part:', partTitleText);
+                            continue;
+                        }
+                        
+                        // Create toggle button
+                        var toggle = document.createElement('span');
+                        toggle.className = 'toggle';
+                        // Remove the innerHTML and inline styles - let CSS handle the appearance
+                        
+                        // Insert toggle at the beginning of part title
+                        partTitle.insertBefore(toggle, partTitle.firstChild);
+                        console.log('Added toggle for part:', partTitleText);
+                        
+                        // Add click handler
+                        (function(partTitle, parentItem, subChapters, toggle, partTitleText) {
+                            // Create a toggle function that can be reused
+                            function toggleExpansion(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                var isExpanded = parentItem.classList.contains('expanded');
+                                
+                                if (isExpanded) {
+                                    parentItem.classList.remove('expanded');
+                                    subChapters.forEach(function(chapter) {
+                                        chapter.classList.add('collapsed');
+                                    });
+                                } else {
+                                    parentItem.classList.add('expanded');
+                                    subChapters.forEach(function(chapter) {
+                                        chapter.classList.remove('collapsed');
+                                    });
+                                }
+                                
+                                console.log('Toggled part:', partTitleText, 'expanded:', !isExpanded);
+                                console.log('Parent item classes after toggle:', parentItem.className);
+                                
+                                // Save state to localStorage
+                                localStorage.setItem('mdbook-fold-' + partTitleText, !isExpanded);
+                            }
+                            
+                            // Add click handler to toggle button
+                            toggle.addEventListener('click', toggleExpansion);
+                            
+                            // Add click handler to the entire part title (but not if it contains a link)
+                            var partTitleLink = partTitle.querySelector('a');
+                            if (!partTitleLink) {
+                                // If there's no link, make the entire part title clickable
+                                partTitle.style.cursor = 'pointer';
+                                partTitle.addEventListener('click', toggleExpansion);
+                            } else {
+                                // If there's a link, add click handler to non-link areas
+                                partTitle.style.cursor = 'pointer';
+                                partTitle.addEventListener('click', function(e) {
+                                    // Only toggle if the click wasn't on the link itself
+                                    if (e.target !== partTitleLink && !partTitleLink.contains(e.target)) {
+                                        toggleExpansion(e);
+                                    }
+                                });
+                            }
+                        })(partTitle, parentItem, subChapters, toggle, partTitleText);
+                        
+                        // Restore state from localStorage or set default
+                        var savedState = localStorage.getItem('mdbook-fold-' + partTitleText);
+                        if (savedState === 'true') {
+                            parentItem.classList.add('expanded');
+                            subChapters.forEach(function(chapter) {
+                                chapter.classList.remove('collapsed');
+                            });
+                        } else if (savedState === 'false') {
+                            parentItem.classList.remove('expanded');
+                            subChapters.forEach(function(chapter) {
+                                chapter.classList.add('collapsed');
+                            });
+                        } else {
+                            // Default to expanded
+                            parentItem.classList.add('expanded');
+                            subChapters.forEach(function(chapter) {
+                                chapter.classList.remove('collapsed');
+                            });
+                        }
+                        
+                        console.log('Part:', partTitleText, 'final state - expanded:', parentItem.classList.contains('expanded'));
+                    }
+                }
+            }
+        }
+
+        // Initialize fold functionality
+        addFoldButtons();
+    });
+})();
