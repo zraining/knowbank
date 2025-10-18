@@ -843,16 +843,12 @@ aria-label="Show hidden lines"></button>';
     document.addEventListener('DOMContentLoaded', function() {
         var sidebar = document.querySelector('.sidebar');
         if (!sidebar) {
-            console.log('Sidebar not found');
             return;
         }
-
-        console.log('Initializing fold functionality');
 
         // Add fold functionality to part titles (sections with sub-chapters)
         function addFoldButtons() {
             var allItems = sidebar.querySelectorAll('ol.chapter > li');
-            console.log('Found all items:', allItems.length);
             
             for (var i = 0; i < allItems.length; i++) {
                 var item = allItems[i];
@@ -891,12 +887,10 @@ aria-label="Show hidden lines"></button>';
                     }
                     
                     var partTitleText = partTitle.textContent.trim();
-                    console.log('Part title:', partTitleText, 'sub-chapters:', subChapters.length);
                     
                     if (subChapters.length > 0) {
                         // Check if toggle already exists
                         if (partTitle.querySelector('.toggle')) {
-                            console.log('Toggle already exists for part:', partTitleText);
                             continue;
                         }
                         
@@ -907,7 +901,6 @@ aria-label="Show hidden lines"></button>';
                         
                         // Insert toggle at the beginning of part title
                         partTitle.insertBefore(toggle, partTitle.firstChild);
-                        console.log('Added toggle for part:', partTitleText);
                         
                         // Add click handler
                         (function(partTitle, parentItem, subChapters, toggle, partTitleText) {
@@ -929,9 +922,6 @@ aria-label="Show hidden lines"></button>';
                                         chapter.classList.remove('collapsed');
                                     });
                                 }
-                                
-                                console.log('Toggled part:', partTitleText, 'expanded:', !isExpanded);
-                                console.log('Parent item classes after toggle:', parentItem.className);
                                 
                                 // Save state to localStorage
                                 localStorage.setItem('mdbook-fold-' + partTitleText, !isExpanded);
@@ -977,8 +967,6 @@ aria-label="Show hidden lines"></button>';
                                 chapter.classList.remove('collapsed');
                             });
                         }
-                        
-                        console.log('Part:', partTitleText, 'final state - expanded:', parentItem.classList.contains('expanded'));
                     }
                 }
             }
