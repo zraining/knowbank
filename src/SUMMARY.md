@@ -57,8 +57,9 @@
   - [6.1 MapReduce：大型集群上的简化数据处理](./papers/systems_architecture/mapreduce_simplified_data_processing.md)
   - [6.2 Raft：寻找可理解的一致性算法](./papers/systems_architecture/raft_understandable_consensus_algorithm.md)
 
-- [7. Agent记忆机制](./papers/agent_memory/README.md)
-  - [7.1 Memory R1](./papers/agent_memory/memory_r1.md)
+- [7. Agent智能体](./papers/agent/README.md)
+  - [7.1 Memory](./papers/agent/memory/README.md)
+    - [7.1.1 Memory R1](./papers/agent/memory/memory_r1.md)
 
 - [8. 其他优秀论文](./papers/others/README.md)
   - [8.1 区块链技术：比特币背后的技术](./papers/others/blockchain_technology_behind_bitcoin.md)
