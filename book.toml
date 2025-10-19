@@ -22,6 +22,7 @@ git-repository-icon = "fa-github"
 smart-punctuation = true
 mathjax-support = true
 copy-fonts = true
+no-section-label = true
 
 # Print support
 print-enable = true
