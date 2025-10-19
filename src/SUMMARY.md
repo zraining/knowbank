@@ -66,6 +66,7 @@
 - [7. Agent智能体](./papers/agent/README.md)
   - [7.1 Memory](./papers/agent/memory/README.md)
     - [7.1.1 Memory R1](./papers/agent/memory/memory_r1.md)
+    - [7.1.2 M3-Agent](./papers/agent/memory/m3_agent.md)
 
 - [8. 其他优秀论文](./papers/others/README.md)
   - [8.1 区块链技术：比特币背后的技术](./papers/others/blockchain_technology_behind_bitcoin.md)
