@@ -20,6 +20,12 @@
 
 # 大语言模型（LLM）知识体系
 - [1. LLM基础概念与原理](./llm_knowledge/llm_fundamentals.md)
+- [2. LLM训练方法与技术](./llm_knowledge/llm_training/README.md)
+  - [2.1 LLM训练概论](./llm_knowledge/llm_training/training_overview.md)
+  - [2.2 预训练技术](./llm_knowledge/llm_training/pretraining.md)
+  - [2.3 微调技术](./llm_knowledge/llm_training/fine_tuning.md)
+  - [2.4 强化学习人类反馈(RLHF)](./llm_knowledge/llm_training/rlhf.md)
+  - [2.5 参数高效微调(PEFT)](./llm_knowledge/llm_training/peft.md)
 
 # AI 驱动型编程（Vibe Coding）
 - [1. Vibe Coding 简介](./vibe_coding/vibe_coding_introduction.md)
