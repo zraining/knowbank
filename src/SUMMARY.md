@@ -32,9 +32,12 @@
 - [2. 可重用的自定义指令](./vibe_coding/custom_instructions.md)
 - [3. 任务类型驱动的Prompt](./vibe_coding/task_prompt.md)
 
-# 智能代理与工具集成
-- [1. Agent工具系统](./agent/agent_tools.md)
-- [2. 模型上下文协议（MCP）](./agent/mcp_protocol.md)
+# Agent 智能代理
+- [1. Agent工具系统](./agent/tools/agent_tools.md)
+  - [1.1 Agent工具系统](./agent/tools/agent_tools.md)
+  - [1.2 模型上下文协议（MCP）](./agent/tools/mcp_protocol.md)
+- [2. Agent记忆系统](./agent/memory/visually_compressed_memory.md)
+  - [2.1 视觉压缩记忆（VCM）](./agent/memory/visually_compressed_memory.md)
 
 # 论文阅读与研究
 
