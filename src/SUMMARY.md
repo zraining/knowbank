@@ -26,6 +26,7 @@
   - [2.3 微调技术](./llm_knowledge/llm_training/fine_tuning.md)
   - [2.4 强化学习人类反馈(RLHF)](./llm_knowledge/llm_training/rlhf.md)
   - [2.5 参数高效微调(PEFT)](./llm_knowledge/llm_training/peft.md)
+- [xx. 学习资源推荐](./llm_knowledge/learning_resources.md)
 
 # AI 驱动型编程（Vibe Coding）
 - [1. Vibe Coding 简介](./vibe_coding/vibe_coding_introduction.md)
@@ -34,9 +35,8 @@
 
 # Agent 智能代理
 - [1. Agent工具系统](./agent/tools/agent_tools.md)
-  - [1.1 Agent工具系统](./agent/tools/agent_tools.md)
-  - [1.2 模型上下文协议（MCP）](./agent/tools/mcp_protocol.md)
-- [2. Agent记忆系统](./agent/memory/visually_compressed_memory.md)
+  - [1.1 模型上下文协议（MCP）](./agent/tools/mcp_protocol.md)
+- [2. Agent记忆系统](./agent/memory/README.md)
   - [2.1 视觉压缩记忆（VCM）](./agent/memory/visually_compressed_memory.md)
 
 # 论文阅读与研究
