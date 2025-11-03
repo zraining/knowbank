@@ -38,6 +38,8 @@
   - [1.1 模型上下文协议（MCP）](./agent/tools/mcp_protocol.md)
 - [2. Agent记忆系统](./agent/memory/README.md)
   - [2.1 视觉压缩记忆（VCM）](./agent/memory/visually_compressed_memory.md)
+- [3. Agent框架分析](./agent/framework/README.md)
+  - [3.1 Parlant框架技术分析](./agent/framework/parlant_technical_analysis.md)
 
 # 论文阅读与研究
 
